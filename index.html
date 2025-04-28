@@ -81,6 +81,22 @@
       padding: 25px 10px;
       margin-top: 40px;
     }
+    form input, form button {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+    }
+    form button {
+      background-color: #238636;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #2ea043;
+    }
   </style>
 </head>
 <body>
@@ -93,7 +109,7 @@
 
 <nav>
   <a href="#services">Services</a>
-  <a href="#payment">Payment</a>
+  <a href="#submit">Submit</a>
   <a href="#contact">Contact</a>
   <a href="#social">Social</a>
 </nav>
@@ -126,10 +142,15 @@
   </div>
 </section>
 
-<section id="payment">
-  <h2>💳 Easy Payment</h2>
-  <p>To begin your assignment, kindly make payment using our secure Yoco link below. Once we receive payment, we get started immediately.</p>
-  <a href="https://pay.yoco.com/r/4ayeg9" class="button" target="_blank">Click Here to Pay</a>
+<section id="submit">
+  <h2>📤 Submit Your Work</h2>
+  <p>Fill in your details, upload your document, and proceed to payment.</p>
+  <form id="submitForm">
+    <input type="text" id="clientName" placeholder="Full Name" required>
+    <input type="email" id="clientEmail" placeholder="Email Address" required>
+    <input type="file" id="clientFile" required>
+    <button type="submit">Upload and Pay</button>
+  </form>
 </section>
 
 <section id="contact">
@@ -149,9 +170,36 @@
 </section>
 
 <footer>
-  <p>&copy; 2025 SubmitPro | Designed with 💙 by Noxlo</p>
+  <p>&copy; 2025 SubmitPro | Designed with 💙 by Noxolo</p>
 </footer>
+
+<script>
+  document.getElementById('submitForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const clientName = document.getElementById('clientName').value;
+    const clientEmail = document.getElementById('clientEmail').value;
+    const clientFile = document.getElementById('clientFile').files[0];
+
+    if (!clientName || !clientEmail || !clientFile) {
+      alert('Please fill in all fields and upload a file.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      // Save info to localStorage temporarily
+      localStorage.setItem('clientName', clientName);
+      localStorage.setItem('clientEmail', clientEmail);
+      localStorage.setItem('clientFileName', clientFile.name);
+      localStorage.setItem('clientFileContent', e.target.result);
+
+      // Redirect to Yoco Payment
+      window.location.href = 'https://pay.yoco.com/r/4ayeg9'; // Your Yoco Payment Link
+    };
+    reader.readAsDataURL(clientFile);
+  });
+</script>
 
 </body>
 </html>
-
