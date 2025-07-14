@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SubmitPro | Work Smart</title>
   <style>
     body {
@@ -70,6 +70,7 @@
       text-decoration: none;
       font-weight: 600;
       transition: background-color 0.3s ease;
+      cursor: pointer;
     }
     .button:hover {
       background-color: #2ea043;
@@ -102,7 +103,7 @@
 <body>
 
 <header>
-  <img src="https://i.postimg.cc/wRxkRcP6/Whats-App-Image-2025-02-27-at-12-52-51.jpg" alt="SubmitPro Logo">
+  <img src="https://i.postimg.cc/wRxkRcP6/Whats-App-Image-2025-02-27-at-12-52-51.jpg" alt="SubmitPro Logo" />
   <h1>SubmitPro</h1>
   <p>Work Smart – Fast, Reliable & Professional Assignment Help</p>
 </header>
@@ -148,6 +149,58 @@
       <li>Thesis/Dissertation Assistance</li>
       <li>Admin IT Tasks & Document Management</li>
     </ul>
+
+    <!-- ✅ Express Delivery Glass Card -->
+    <div style="
+      margin-top: 30px;
+      background: rgba(22, 27, 34, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 25px;
+      border: 1px solid rgba(88,166,255,0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      color: #c9d1d9;
+    ">
+      <h3 style="color:#58a6ff; margin-top: 0;">💼 Express Delivery</h3>
+      <p style="margin-bottom: 0;">Need your assignment urgently? Choose our express delivery option and receive your completed task in less than 24 hours – perfect for last-minute deadlines.</p>
+    </div>
+    <!-- ✅ End Express Delivery Glass Card -->
+
+    <!-- 👩‍🏫 Tutoring Services Glass Card -->
+    <div style="
+      margin-top: 30px;
+      background: rgba(22, 27, 34, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 25px;
+      border: 1px solid rgba(88,166,255,0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      color: #c9d1d9;
+    ">
+      <h3 style="color:#58a6ff;">🧑‍🏫 IT & Coding Tutoring (1-on-1)</h3>
+      <p>Need help understanding your course material? I offer friendly, professional tutoring in IT and programming — perfect for high school, college, and university students.</p>
+
+      <p><strong>📘 Topics I Cover:</strong></p>
+      <ul style="padding-left: 20px;">
+        <li>HTML, CSS, JavaScript</li>
+        <li>Java (OOP, Console, and GUI Projects)</li>
+        <li>Python (Beginner to Intermediate)</li>
+        <li>MySQL & Database Concepts</li>
+        <li>WordPress Development & Hosting</li>
+        <li>Admin IT Concepts & File Management</li>
+      </ul>
+
+      <p style="margin-top: 15px;">
+        Whether you're completely new or just stuck on a topic — I’m here to help. I work especially well with beginners and students who need a little extra explanation. 
+        You can reach me anytime by phone or WhatsApp. No pressure, no judgment — just results.
+      </p>
+      
+      <a href="https://wa.me/27605623095" target="_blank" class="button" style="background-color:#1f6feb;">📞 Book a Tutoring Call</a>
+    </div>
+    <!-- 👩‍🏫 End Tutoring Services Glass Card -->
+
   </div>
 </section>
 
@@ -155,9 +208,9 @@
   <h2>📤 Submit Your Work</h2>
   <p>Fill in your details, upload your document, and proceed to payment.</p>
   <form id="submitForm">
-    <input type="text" id="clientName" placeholder="Full Name" required>
-    <input type="email" id="clientEmail" placeholder="Email Address" required>
-    <input type="file" id="clientFile" required>
+    <input type="text" id="clientName" placeholder="Full Name" required />
+    <input type="email" id="clientEmail" placeholder="Email Address" required />
+    <input type="file" id="clientFile" required />
     <button type="submit">Upload and Pay</button>
   </form>
 </section>
@@ -167,7 +220,22 @@
   <p>Have questions or ready to submit your task? Reach out to us via your preferred method below:</p>
   <div class="contact-info">
     <p>Email: <a href="mailto:submitpro06@gmail.com">submitpro06@gmail.com</a></p>
-    <p>WhatsApp: <a href="https://wa.me/27605623095">060 562 3095</a></p>
+    <p>WhatsApp: </p>
+    <a href="https://wa.me/27605623095" target="_blank" style="
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+    ">
+      💬 Chat with us
+    </a>
     <p>Phone: 060 562 3095</p>
   </div>
 </section>
@@ -197,14 +265,12 @@
 
     const reader = new FileReader();
     reader.onload = function(e) {
-      // Save info to localStorage temporarily
       localStorage.setItem('clientName', clientName);
       localStorage.setItem('clientEmail', clientEmail);
       localStorage.setItem('clientFileName', clientFile.name);
       localStorage.setItem('clientFileContent', e.target.result);
 
-      // Redirect to Yoco Payment
-      window.location.href = 'https://pay.yoco.com/r/4ayeg9'; // Your Yoco Payment Link
+      window.location.href = 'https://pay.yoco.com/r/4ayeg9';
     };
     reader.readAsDataURL(clientFile);
   });
@@ -212,4 +278,3 @@
 
 </body>
 </html>
-
