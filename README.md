@@ -2,78 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SubmitPro | Work Smart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SubmitPro | Assignment Help & Virtual Internet Café</title>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       background: #0d1117;
       color: #c9d1d9;
-      line-height: 1.6;
     }
     header {
       background: linear-gradient(135deg, #1f6feb, #0d1117);
       padding: 40px 20px;
       text-align: center;
-      color: #ffffff;
     }
     header img {
       width: 120px;
-      margin-bottom: 10px;
       border-radius: 50%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
     nav {
       background: #161b22;
-      padding: 15px 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      padding: 15px;
       text-align: center;
     }
     nav a {
       color: #58a6ff;
-      margin: 0 20px;
+      margin: 0 15px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
     }
     nav a:hover {
       color: #1f6feb;
     }
-    section {
-      padding: 50px 20px;
+    .container {
       max-width: 1000px;
       margin: 30px auto;
       background: #161b22;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 10px;
     }
-    h2 {
-      color: #58a6ff;
-      margin-bottom: 20px;
-    }
-    .contact-info a {
-      color: #58a6ff;
-      text-decoration: none;
-      display: block;
-      margin-top: 8px;
-    }
-    .services ul {
-      padding-left: 20px;
-    }
-    .button {
-      display: inline-block;
-      background-color: #238636;
-      color: white;
-      padding: 12px 24px;
-      margin-top: 20px;
+    input, button, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
+      border: none;
+      background: #0d1117;
+      color: #c9d1d9;
+      border: 1px solid #333;
+    }
+    button {
+      background: #238636;
+      font-weight: bold;
       cursor: pointer;
     }
-    .button:hover {
-      background-color: #2ea043;
+    button:hover {
+      background: #2ea043;
     }
     footer {
       background: #0d1117;
@@ -82,149 +70,10 @@
       padding: 25px 10px;
       margin-top: 40px;
     }
-    form input, form button {
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-    }
-    form button {
-      background-color: #238636;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    form button:hover {
-      background-color: #2ea043;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <img src="https://i.postimg.cc/wRxkRcP6/Whats-App-Image-2025-02-27-at-12-52-51.jpg" alt="SubmitPro Logo" />
-  <h1>SubmitPro</h1>
-  <p>Work Smart – Fast, Reliable & Professional Assignment Help</p>
-</header>
-
-<nav>
-  <a href="#services">Services</a>
-  <a href="#submit">Submit</a>
-  <a href="#contact">Contact</a>
-  <a href="#social">Social</a>
-</nav>
-
-<section id="services">
-  <h2>📚 Our Services</h2>
-  <p>Struggling with coding or academic documents? SubmitPro is your go-to solution for quality work and quick turnarounds.</p>
-  <div class="services">
-    <h3>💻 Coding Assignments</h3>
-    <ul>
-      <li>HTML/CSS Website Design</li>
-      <li>PHP Forms & Systems</li>
-      <li>JavaScript (Basic)</li>
-      <li>WordPress Development</li>
-      <li>Database Integration (MySQL)</li>
-      <li>Responsive Web Design</li>
-      <li>Bug Fixing & Debugging</li>
-    </ul>
-
-    <h3>🛒 E-commerce Website Design</h3>
-    <ul>
-      <li>Online Shop Setup (Dropshipping & Product Stores)</li>
-      <li>Secure Checkout Integration</li>
-      <li>Mobile-Friendly & Fast Design</li>
-      <li>Website Customization & Edits</li>
-      <li><strong>Sample Shop:</strong> <a href="https://nox833.github.io/noxolo-dropshipping-site-/" target="_blank" style="color:#58a6ff;">Click to view demo</a></li>
-    </ul>
-
-    <h3>📄 Microsoft Word & Admin Tasks</h3>
-    <ul>
-      <li>Essay & Report Writing</li>
-      <li>Formatting (APA, MLA, etc.)</li>
-      <li>Tables, Charts, and Graphs</li>
-      <li>Proofreading & Grammar Check</li>
-      <li>Resume/CV Creation</li>
-      <li>Thesis/Dissertation Assistance</li>
-      <li>Admin IT Tasks & Document Management</li>
-    </ul>
-
-    <!-- ✅ Express Delivery Glass Card -->
-    <div style="
-      margin-top: 30px;
-      background: rgba(22, 27, 34, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 25px;
-      border: 1px solid rgba(88,166,255,0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      color: #c9d1d9;
-    ">
-      <h3 style="color:#58a6ff; margin-top: 0;">💼 Express Delivery</h3>
-      <p style="margin-bottom: 0;">Need your assignment urgently? Choose our express delivery option and receive your completed task in less than 24 hours – perfect for last-minute deadlines.</p>
-    </div>
-    <!-- ✅ End Express Delivery Glass Card -->
-
-    <!-- 👩‍🏫 Tutoring Services Glass Card -->
-    <div style="
-      margin-top: 30px;
-      background: rgba(22, 27, 34, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 25px;
-      border: 1px solid rgba(88,166,255,0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      color: #c9d1d9;
-    ">
-      <h3 style="color:#58a6ff;">🧑‍🏫 IT & Coding Tutoring (1-on-1)</h3>
-      <p>Need help understanding your course material? I offer friendly, professional tutoring in IT and programming — perfect for high school, college, and university students.</p>
-
-      <p><strong>📘 Topics I Cover:</strong></p>
-      <ul style="padding-left: 20px;">
-        <li>HTML, CSS, JavaScript</li>
-        <li>Java (OOP, Console, and GUI Projects)</li>
-        <li>Python (Beginner to Intermediate)</li>
-        <li>MySQL & Database Concepts</li>
-        <li>WordPress Development & Hosting</li>
-        <li>Admin IT Concepts & File Management</li>
-      </ul>
-
-      <p style="margin-top: 15px;">
-        Whether you're completely new or just stuck on a topic — I’m here to help. I work especially well with beginners and students who need a little extra explanation. 
-        You can reach me anytime by phone or WhatsApp. No pressure, no judgment — just results.
-      </p>
-      
-      <a href="https://wa.me/27605623095" target="_blank" class="button" style="background-color:#1f6feb;">📞 Book a Tutoring Call</a>
-    </div>
-    <!-- 👩‍🏫 End Tutoring Services Glass Card -->
-
-  </div>
-</section>
-
-<section id="submit">
-  <h2>📤 Submit Your Work</h2>
-  <p>Fill in your details, upload your document, and proceed to payment.</p>
-  <form id="submitForm">
-    <input type="text" id="clientName" placeholder="Full Name" required />
-    <input type="email" id="clientEmail" placeholder="Email Address" required />
-    <input type="file" id="clientFile" required />
-    <button type="submit">Upload and Pay</button>
-  </form>
-</section>
-
-<section id="contact">
-  <h2>📞 Contact Us</h2>
-  <p>Have questions or ready to submit your task? Reach out to us via your preferred method below:</p>
-  <div class="contact-info">
-    <p>Email: <a href="mailto:submitpro06@gmail.com">submitpro06@gmail.com</a></p>
-    <p>WhatsApp: </p>
-    <a href="https://wa.me/27605623095" target="_blank" style="
+    #whatsapp-chat {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
+      bottom: 20px;
+      right: 20px;
       background-color: #25D366;
       color: white;
       padding: 12px 16px;
@@ -233,48 +82,127 @@
       font-weight: bold;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       z-index: 999;
-    ">
-      💬 Chat with us
-    </a>
-    <p>Phone: 060 562 3095</p>
-  </div>
+    }
+    .post {
+      background: #21262d;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+    .post small {
+      color: #8b949e;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://i.postimg.cc/wRxkRcP6/Whats-App-Image-2025-02-27-at-12-52-51.jpg" alt="SubmitPro Logo" />
+  <h1>SubmitPro</h1>
+  <p>Work Smart – Fast, Reliable & Professional Assignment Help + Virtual Internet Café</p>
+</header>
+
+<nav>
+  <a href="#services">Services</a>
+  <a href="#post">Post Task</a>
+  <a href="#contact">Contact</a>
+  <a href="#social">Social</a>
+</nav>
+
+<section id="services" class="container">
+  <h2>📚 SubmitPro Services</h2>
+  <p>Struggling with coding, school applications, or academic documents? SubmitPro is your go-to solution for quality work and quick turnarounds.</p>
+
+  <h3>💻 Coding Assignments</h3>
+  <ul>
+    <li>HTML/CSS Website Design</li>
+    <li>PHP Forms & Systems</li>
+    <li>JavaScript (Basic)</li>
+    <li>WordPress Development</li>
+    <li>Database Integration (MySQL)</li>
+    <li>Responsive Web Design</li>
+    <li>Bug Fixing & Debugging</li>
+  </ul>
+
+  <h3>🛒 E-commerce Website Design</h3>
+  <ul>
+    <li>Online Shop Setup (Dropshipping & Product Stores)</li>
+    <li>Secure Checkout Integration</li>
+    <li>Mobile-Friendly & Fast Design</li>
+    <li>Website Customization & Edits</li>
+    <li><strong>Sample Shop:</strong> <a href="https://nox833.github.io/noxolo-dropshipping-site-/" target="_blank" style="color:#58a6ff;">Click to view demo</a></li>
+  </ul>
+
+  <h3>📄 Microsoft Word & Admin Tasks</h3>
+  <ul>
+    <li>Essay & Report Writing</li>
+    <li>Formatting (APA, MLA, etc.)</li>
+    <li>Tables, Charts, and Graphs</li>
+    <li>Proofreading & Grammar Check</li>
+    <li>Resume/CV Creation</li>
+    <li>Thesis/Dissertation Assistance</li>
+    <li>Admin IT Tasks & Document Management</li>
+  </ul>
+
+  <h3>💼 Express Delivery</h3>
+  <p>Need your assignment urgently? Choose our express delivery option and receive your completed task in less than 24 hours – perfect for last-minute deadlines.</p>
+
+  <h3>🧑‍🏫 IT & Coding Tutoring (1-on-1)</h3>
+  <ul>
+    <li>HTML, CSS, JavaScript</li>
+    <li>Java (OOP, Console, and GUI Projects)</li>
+    <li>Python (Beginner to Intermediate)</li>
+    <li>MySQL & Database Concepts</li>
+    <li>WordPress Development & Hosting</li>
+    <li>Admin IT Concepts & File Management</li>
+  </ul>
+  <p>Whether you're completely new or just stuck on a topic — I’m here to help. I work especially well with beginners and students who need a little extra explanation.</p>
+
+  <h3>🌐 Virtual Internet Café Services</h3>
+  <ul>
+    <li>🏫 Help with School Applications</li>
+    <li>📠 Printing & Scanning Support</li>
+    <li>📥 CV and Job Application Help</li>
+    <li>🧾 SARS eFiling & Online Applications</li>
+    <li>📧 Email Setup and Typing Services</li>
+    <li>📷 Upload Your Request — We Do It for You</li>
+    <li>💻 Remote IT Support for School/College Projects</li>
+    <li>🛍️ Graphic Design, Poster & Flyer Creation</li>
+    <li>🎓 Online Study Assistance & Submissions</li>
+    <li>🌐 Website Design (Business, Portfolio, eCommerce)</li>
+    <li>📚 Research, Assignments & Past Exam Papers</li>
+    <li>📊 Microsoft Excel Work, Data Entry, and Stats Help</li>
+    <li>🖼️ Digital CV, Brochure and Presentation Design</li>
+    <li>📢 Online Advertisement Creation & Posting</li>
+  </ul>
+  
+  <img class="promo-img" src="https://i.postimg.cc/dtpkS54J/workongh.jpg" alt="Internet Cafe Promo">
 </section>
 
-<section id="social">
+<section id="post" class="container">
+  <h2>📤 Post a Task or Advert</h2>
+  <p>You can also send your image or request via WhatsApp. We’ll follow up with support or post your advert where needed. We handle everything — just describe or snap a picture 📷</p>
+  <a href="https://wa.me/27605623095" style="color:#58a6ff; font-weight:bold;">Click here to post directly on WhatsApp</a>
+</section>
+
+<section id="contact" class="container">
+  <h2>📞 Contact Us</h2>
+  <p>Email: <a href="mailto:submitpro06@gmail.com">submitpro06@gmail.com</a></p>
+  <p>WhatsApp: <a href="https://wa.me/27605623095">060 562 3095</a></p>
+</section>
+
+<section id="social" class="container">
   <h2>🎥 Follow Us on TikTok</h2>
   <p>See our helpful tips and updates on TikTok:</p>
   <a href="https://tiktok.com/@submitpro8" target="_blank">@submitpro8</a>
+  
 </section>
+
+<a href="https://wa.me/27605623095" id="whatsapp-chat">💬 Chat with us</a>
 
 <footer>
   <p>&copy; 2025 SubmitPro | Designed with 💙 by Noxolo</p>
 </footer>
-
-<script>
-  document.getElementById('submitForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const clientName = document.getElementById('clientName').value;
-    const clientEmail = document.getElementById('clientEmail').value;
-    const clientFile = document.getElementById('clientFile').files[0];
-
-    if (!clientName || !clientEmail || !clientFile) {
-      alert('Please fill in all fields and upload a file.');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      localStorage.setItem('clientName', clientName);
-      localStorage.setItem('clientEmail', clientEmail);
-      localStorage.setItem('clientFileName', clientFile.name);
-      localStorage.setItem('clientFileContent', e.target.result);
-
-      window.location.href = 'https://pay.yoco.com/r/4ayeg9';
-    };
-    reader.readAsDataURL(clientFile);
-  });
-</script>
 
 </body>
 </html>
