@@ -3,94 +3,305 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SubmitPro | Assignment Help & Virtual Internet Café</title>
+  <title>SubmitPro | Assignment Guru & Virtual Internet Café</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Firebase Scripts (optional if not used) -->
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js"></script>
   <style>
+    :root {
+      --primary: #00e6ff;
+      --secondary: #1f6feb;
+      --accent: #fe79a6;
+      --bg-main: #0d1117;
+      --bg-card: #151c23;
+      --bg-glass: rgba(30,40,60,0.83);
+      --text-main: #e8f1fa;
+      --text-muted: #8b949e;
+      --success: #0f0;
+      --shadow: 0 8px 32px 0 rgba(0,60,255,0.15), 0 1.5px 4px 0 rgba(0,255,255,0.10);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Roboto', 'Montserrat', Arial, sans-serif;
       margin: 0;
-      background: #0d1117;
-      color: #c9d1d9;
+      background: radial-gradient(ellipse at top right, #1f6feb 40%, #0d1117 95%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      letter-spacing: 0.01em;
     }
     header {
-      background: linear-gradient(135deg, #1f6feb, #0d1117);
-      padding: 40px 20px;
+      background: linear-gradient(120deg, #0f172a 60%, var(--secondary) 120%);
+      padding: 60px 20px 30px 20px;
       text-align: center;
+      position: relative;
+      box-shadow: var(--shadow);
+      border-bottom: 2px solid var(--primary);
+      z-index: 2;
+    }
+    header:before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -120px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle at 70% 30%, var(--primary) 10%, transparent 80%);
+      filter: blur(35px);
+      opacity: 0.55;
+      z-index: 1;
     }
     header img {
       width: 120px;
       border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 30px 0 var(--primary), 0 2px 8px 0 #0007;
+      border: 3.5px solid var(--primary);
+      margin-top: -15px;
+      position: relative;
+      z-index: 3;
+      background: #fff;
+    }
+    .header-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--primary), var(--accent) 65%, var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.2em;
+      letter-spacing: -0.02em;
+      margin-top: 15px;
+    }
+    .header-tagline {
+      font-size: 1.22rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      font-family: 'Montserrat', sans-serif;
     }
     nav {
-      background: #161b22;
-      padding: 15px;
+      background: var(--bg-card);
+      padding: 0.8em 0;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 16px 0 rgba(0,230,255,0.03);
+      border-bottom: 1.5px solid var(--secondary);
     }
     nav a {
-      color: #58a6ff;
-      margin: 0 15px;
+      color: var(--primary);
+      margin: 0 28px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 1.13rem;
+      letter-spacing: 0.06em;
+      transition: color 0.18s;
+      padding-bottom: 3px;
+      position: relative;
     }
-    nav a:hover {
-      color: #1f6feb;
+    nav a::after {
+      content: "";
+      display: block;
+      height: 2.5px;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.27s;
+      position: absolute;
+      bottom: -4px; left: 50%;
+      transform: translateX(-50%);
+    }
+    nav a:hover, nav a:focus {
+      color: var(--accent);
+    }
+    nav a:hover::after, nav a:focus::after {
+      width: 65%;
     }
     .container {
-      max-width: 1000px;
-      margin: 30px auto;
-      background: #161b22;
-      padding: 20px;
-      border-radius: 10px;
+      max-width: 950px;
+      margin: 38px auto;
+      background: var(--bg-glass);
+      box-shadow: var(--shadow);
+      padding: 38px 28px 32px 28px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      border: 1.7px solid var(--secondary);
+      margin-bottom: 32px;
+    }
+    .container h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      margin-top: 0;
+      background: linear-gradient(90deg, var(--primary), var(--accent) 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    h3 {
+      margin-top: 2em;
+      margin-bottom: 0.6em;
+      color: var(--primary);
+      font-size: 1.28rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.01em;
+    }
+    ul {
+      margin-top: 0.5em;
+    }
+    ul li {
+      margin-bottom: 0.35em;
+      font-size: 1.07rem;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
+    }
+    .promo-img {
+      display: block;
+      margin: 28px auto 0 auto;
+      max-width: 340px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 0 24px 0 var(--secondary), 0 4px 16px 0 #0009;
+      border: 2px solid var(--primary);
+      animation: float 4.5s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-10px);}
+    }
+    .speed-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary), #fff0 60%, var(--accent) 100%);
+      color: #161b22;
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      border-radius: 15px;
+      padding: 0.4em 1.2em;
+      font-size: 1rem;
+      margin-bottom: 1.2em;
+      margin-top: 0.4em;
+      letter-spacing: 0.12em;
+      box-shadow: 0 2px 8px 0 #00e6ff33;
+      border: 1.3px solid var(--primary);
+      animation: wiggle 2.7s infinite ease-in-out;
+    }
+    @keyframes wiggle {
+      0%,100% { transform: rotate(-1deg);}
+      40% { transform: rotate(2.5deg);}
+      70% { transform: rotate(-2.5deg);}
     }
     input, button, textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 10px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
-      background: #0d1117;
-      color: #c9d1d9;
-      border: 1px solid #333;
+      background: #151c23;
+      color: var(--text-main);
+      border: 1.2px solid var(--secondary);
+      font-size: 1rem;
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 0 2px 8px 0 #0d111733;
     }
     button {
-      background: #238636;
-      font-weight: bold;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      font-weight: 700;
+      color: #0d1117;
       cursor: pointer;
+      margin-top: 12px;
+      letter-spacing: 0.02em;
+      transition: background 0.19s, color 0.19s;
     }
     button:hover {
-      background: #2ea043;
-    }
-    footer {
-      background: #0d1117;
-      color: #8b949e;
-      text-align: center;
-      padding: 25px 10px;
-      margin-top: 40px;
-    }
-    #whatsapp-chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      padding: 12px 16px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 999;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      color: var(--primary);
+      border: 2px solid var(--primary);
     }
     .post {
-      background: #21262d;
-      padding: 15px;
-      border-radius: 10px;
+      background: #1b2330c0;
+      padding: 18px;
+      border-radius: 13px;
       margin-top: 15px;
+      box-shadow: 0 0 6px 0 #0df9;
     }
     .post small {
-      color: #8b949e;
+      color: var(--text-muted);
+    }
+    /* WhatsApp Floating Button */
+    #whatsapp-chat {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      background: linear-gradient(90deg, #25D366, #10e6b7 80%);
+      color: #fff;
+      padding: 13px 19px;
+      border-radius: 64px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.19rem;
+      box-shadow: 0 4px 16px 0 #25d36680;
+      z-index: 999;
+      transition: transform 0.13s;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border: 1.7px solid #fff;
+    }
+    #whatsapp-chat:hover {
+      transform: scale(1.08) translateY(-3px);
+      background: linear-gradient(90deg, #10e6b7, #25D366 80%);
+    }
+    /* Social Section */
+    #social a {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      color: #fff;
+      padding: 8px 24px;
+      font-size: 1.13rem;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px 0 #1f6feb55;
+      margin-top: 0.8em;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    #social a:hover {
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      color: var(--primary);
+    }
+    /* Footer */
+    footer {
+      background: #13191f;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 32px 12px 18px 12px;
+      margin-top: 40px;
+      font-size: 1.12rem;
+      font-family: 'Montserrat', sans-serif;
+      border-top: 2.2px solid var(--secondary);
+      letter-spacing: 0.04em;
+    }
+    /* Responsive */
+    @media (max-width: 720px) {
+      header { padding: 32px 5vw 19px 5vw;}
+      .container {padding: 20px 6vw;}
+      nav a {margin: 0 10px;}
+      .header-title { font-size: 2.1rem;}
+      .promo-img {max-width: 98vw;}
+      .container h2 { font-size: 1.3rem;}
+    }
+    @media (max-width: 500px) {
+      nav {font-size: 1rem;}
+      .container {padding: 13px 3vw;}
+      .promo-img {margin-top: 15px;}
     }
   </style>
 </head>
@@ -98,45 +309,50 @@
 
 <header>
   <img src="https://i.postimg.cc/wRxkRcP6/Whats-App-Image-2025-02-27-at-12-52-51.jpg" alt="SubmitPro Logo" />
-  <h1>SubmitPro</h1>
-  <p>Work Smart – Fast, Reliable & Professional Assignment Help + Virtual Internet Café</p>
+  <div class="header-title">
+    <i class="fa-solid fa-bolt"></i> SubmitPro
+  </div>
+  <div class="speed-badge"><i class="fa-solid fa-rocket"></i> FAST | GURU LEVEL | 24/7</div>
+  <div class="header-tagline">
+    Work Faster – Smarter. <span style="color:var(--primary);">Assignment Guru</span> & <span style="color:var(--accent);">Virtual Internet Café</span>
+  </div>
 </header>
 
 <nav>
-  <a href="#services">Services</a>
-  <a href="#post">Post Task</a>
-  <a href="#contact">Contact</a>
-  <a href="#social">Social</a>
+  <a href="#services"><i class="fa-solid fa-list-check"></i> Services</a>
+  <a href="#post"><i class="fa-solid fa-paper-plane"></i> Post Task</a>
+  <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+  <a href="#social"><i class="fa-brands fa-tiktok"></i> Social</a>
 </nav>
 
 <section id="services" class="container">
-  <h2>📚 SubmitPro Services</h2>
-  <p>Struggling with coding, school applications, or academic documents? SubmitPro is your go-to solution for quality work and quick turnarounds.</p>
+  <h2><i class="fa-solid fa-sparkles"></i> SubmitPro Services</h2>
+  <p>Welcome to <b>SubmitPro</b> – the ultimate destination for blazing-fast, professional coding, assignments, and virtual internet café solutions. Get <span style="color:var(--primary);font-weight:bold;">expert help</span> in minutes, not days.</p>
 
-  <h3>💻 Coding Assignments</h3>
+  <h3><i class="fa-solid fa-code"></i> Coding Assignments</h3>
   <ul>
-    <li>HTML/CSS Website Design</li>
+    <li><b>HTML/CSS</b> Website Design</li>
     <li>PHP Forms & Systems</li>
-    <li>JavaScript (Basic)</li>
+    <li>JavaScript (Basic & Intermediate)</li>
     <li>WordPress Development</li>
     <li>Database Integration (MySQL)</li>
-    <li>Responsive Web Design</li>
+    <li>Responsive & Lightning Fast Web Design</li>
     <li>Bug Fixing & Debugging</li>
   </ul>
 
-  <h3>🛒 E-commerce Website Design</h3>
+  <h3><i class="fa-solid fa-cart-shopping"></i> E-commerce Website Design</h3>
   <ul>
     <li>Online Shop Setup (Dropshipping & Product Stores)</li>
     <li>Secure Checkout Integration</li>
-    <li>Mobile-Friendly & Fast Design</li>
+    <li>Mobile-Optimized, Fast & Modern</li>
     <li>Website Customization & Edits</li>
-    <li><strong>Sample Shop:</strong> <a href="https://nox833.github.io/noxolo-dropshipping-site-/" target="_blank" style="color:#58a6ff;">Click to view demo</a></li>
+    <li><strong>Sample Shop:</strong> <a href="https://nox833.github.io/noxolo-dropshipping-site-/" target="_blank" style="color:var(--primary);">View Demo</a></li>
   </ul>
 
-  <h3>📄 Microsoft Word & Admin Tasks</h3>
+  <h3><i class="fa-solid fa-file-word"></i> Microsoft Word & Admin Tasks</h3>
   <ul>
     <li>Essay & Report Writing</li>
-    <li>Formatting (APA, MLA, etc.)</li>
+    <li>Formatting (APA, MLA, Harvard...)</li>
     <li>Tables, Charts, and Graphs</li>
     <li>Proofreading & Grammar Check</li>
     <li>Resume/CV Creation</li>
@@ -144,64 +360,76 @@
     <li>Admin IT Tasks & Document Management</li>
   </ul>
 
-  <h3>💼 Express Delivery</h3>
-  <p>Need your assignment urgently? Choose our express delivery option and receive your completed task in less than 24 hours – perfect for last-minute deadlines.</p>
+  <h3><i class="fa-solid fa-bolt"></i> Express Delivery</h3>
+  <p>Deadline in a few hours? No problem. Our <span style="color:var(--success);font-weight:bold;">express delivery</span> guarantees your project in <b>&lt;24h</b> — perfect for urgent deadlines.</p>
 
-  <h3>🧑‍🏫 IT & Coding Tutoring (1-on-1)</h3>
+  <h3><i class="fa-solid fa-chalkboard-user"></i> IT & Coding Tutoring (1-on-1)</h3>
   <ul>
     <li>HTML, CSS, JavaScript</li>
-    <li>Java (OOP, Console, and GUI Projects)</li>
+    <li>Java (OOP, Console, GUI)</li>
     <li>Python (Beginner to Intermediate)</li>
     <li>MySQL & Database Concepts</li>
     <li>WordPress Development & Hosting</li>
     <li>Admin IT Concepts & File Management</li>
   </ul>
-  <p>Whether you're completely new or just stuck on a topic — I’m here to help. I work especially well with beginners and students who need a little extra explanation.</p>
+  <p>Whether you're a complete beginner or just stuck on a topic — <b>SubmitPro</b> gives patient, step-by-step help. <span style="color:var(--primary);">No judgment, just results!</span></p>
 
-  <h3>🌐 Virtual Internet Café Services</h3>
+  <h3><i class="fa-solid fa-globe"></i> Virtual Internet Café Services</h3>
   <ul>
-    <li>🏫 Help with School Applications</li>
-    <li>📠 Printing & Scanning Support</li>
-    <li>📥 CV and Job Application Help</li>
-    <li>🧾 SARS eFiling & Online Applications</li>
-    <li>📧 Email Setup and Typing Services</li>
-    <li>📷 Upload Your Request — We Do It for You</li>
-    <li>💻 Remote IT Support for School/College Projects</li>
-    <li>🛍️ Graphic Design, Poster & Flyer Creation</li>
-    <li>🎓 Online Study Assistance & Submissions</li>
-    <li>🌐 Website Design (Business, Portfolio, eCommerce)</li>
-    <li>📚 Research, Assignments & Past Exam Papers</li>
-    <li>📊 Microsoft Excel Work, Data Entry, and Stats Help</li>
-    <li>🖼️ Digital CV, Brochure and Presentation Design</li>
-    <li>📢 Online Advertisement Creation & Posting</li>
+    <li><i class="fa-solid fa-school"></i> School Applications & Enrolments</li>
+    <li><i class="fa-solid fa-print"></i> Printing & Scanning Support</li>
+    <li><i class="fa-solid fa-briefcase"></i> CV & Job Application Help</li>
+    <li><i class="fa-solid fa-building-columns"></i> SARS eFiling & Online Government Forms</li>
+    <li><i class="fa-solid fa-envelope"></i> Email Setup & Typing</li>
+    <li><i class="fa-solid fa-upload"></i> Upload Your Request — We Handle The Rest</li>
+    <li><i class="fa-solid fa-laptop-code"></i> Remote IT Support (School/College Projects)</li>
+    <li><i class="fa-solid fa-paintbrush"></i> Graphic Design: Posters & Flyers</li>
+    <li><i class="fa-solid fa-graduation-cap"></i> Study Assistance, Exam Prep & Submissions</li>
+    <li><i class="fa-solid fa-laptop"></i> Website Design (Business, Portfolio, eCommerce)</li>
+    <li><i class="fa-solid fa-book"></i> Research, Assignments & Past Papers</li>
+    <li><i class="fa-solid fa-chart-column"></i> Excel Work, Data Entry & Stats Help</li>
+    <li><i class="fa-solid fa-images"></i> Digital CV, Brochure & Presentation Design</li>
+    <li><i class="fa-solid fa-bullhorn"></i> Online Advertisement Creation & Posting</li>
   </ul>
-  
+
   <img class="promo-img" src="https://i.postimg.cc/dtpkS54J/workongh.jpg" alt="Internet Cafe Promo">
 </section>
 
 <section id="post" class="container">
-  <h2>📤 Post a Task or Advert</h2>
-  <p>You can also send your image or request via WhatsApp. We’ll follow up with support or post your advert where needed. We handle everything — just describe or snap a picture 📷</p>
-  <a href="https://wa.me/27605623095" style="color:#58a6ff; font-weight:bold;">Click here to post directly on WhatsApp</a>
+  <h2><i class="fa-solid fa-paper-plane"></i> Post a Task or Advert</h2>
+  <p>
+    Get started instantly! <b>Snap a photo, describe your needs, and we’ll do the rest.</b><br>
+    <span style="color:var(--primary);">WhatsApp, Email, or Post below for lightning-fast service.</span>
+  </p>
+  <a href="https://wa.me/27605623095" style="color:var(--primary); font-weight:bold; font-size:1.13rem;" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i> Click here to post directly on WhatsApp
+  </a>
 </section>
 
 <section id="contact" class="container">
-  <h2>📞 Contact Us</h2>
-  <p>Email: <a href="mailto:submitpro06@gmail.com">submitpro06@gmail.com</a></p>
-  <p>WhatsApp: <a href="https://wa.me/27605623095">060 562 3095</a></p>
+  <h2><i class="fa-solid fa-envelope"></i> Contact Us</h2>
+  <p>
+    <i class="fa-solid fa-envelope"></i> Email: 
+    <a href="mailto:submitpro06@gmail.com" style="color:var(--primary); font-weight:bold;">submitpro06@gmail.com</a>
+  </p>
+  <p>
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp: 
+    <a href="https://wa.me/27605623095" style="color:var(--primary); font-weight:bold;">060 562 3095</a>
+  </p>
 </section>
 
 <section id="social" class="container">
-  <h2>🎥 Follow Us on TikTok</h2>
-  <p>See our helpful tips and updates on TikTok:</p>
-  <a href="https://tiktok.com/@submitpro8" target="_blank">@submitpro8</a>
-  
+  <h2><i class="fa-brands fa-tiktok"></i> Follow Us on TikTok</h2>
+  <p>See our latest tips, portfolio, and success stories on TikTok:</p>
+  <a href="https://tiktok.com/@submitpro8" target="_blank"><i class="fa-brands fa-tiktok"></i> @submitpro8</a>
 </section>
 
-<a href="https://wa.me/27605623095" id="whatsapp-chat">💬 Chat with us</a>
+<a href="https://wa.me/27605623095" id="whatsapp-chat">
+  <i class="fa-brands fa-whatsapp"></i> Chat with us
+</a>
 
 <footer>
-  <p>&copy; 2025 SubmitPro | Designed with 💙 by Noxolo</p>
+  <p>&copy; 2025 SubmitPro | Designed with <span style="color:var(--primary);font-size:1.2em;">💙</span> by Noxolo | Guru Service, Ultra Fast, Out of this World.</p>
 </footer>
 
 </body>
